@@ -14,9 +14,7 @@
 
 # [START gae_python37_app]
 from flask import Flask
-from requests import get
-from requests.exceptions import RequestException
-from contextlib import closing
+from google.appengine.api import urlfetch
 
 # If `entrypoint` is not defined in app.yaml, App Engine will look for an app
 # called `app` in `main.py`.
@@ -26,48 +24,19 @@ app = Flask(__name__)
 @app.route('/')
 def hello():
     """Return a friendly HTTP greeting."""
-    input_code = "xjo"
-    input_url = "https://www.asx.com.au/asx/markets/optionPrices.do?by=underlyingCode&underlyingCode=" + input_code + "&expiryDate=&optionType=B"
-    raw_html = simple_get(input_url)
-    html = BeautifulSoup(raw_html, 'html.parser')
-    
-    return html
-
-def simple_get(url):
-    """
-    Attempts to get the content at `url` by making an HTTP GET request.
-    If the content-type of response is some kind of HTML/XML, return the
-    text content, otherwise return None.
-    """
+    url = 'http://www.google.com/humans.txt'
+    returnString = ""
     try:
-        with closing(get(url, stream=True)) as resp:
-            if is_good_response(resp):
-                return resp.content
-            else:
-                return None
+        result = urlfetch.fetch(url)
+        if result.status_code == 200:
+            self.response.write(result.content)
+            returnString = result.content
+        else:
+            self.response.status_code = result.status_code
+    except urlfetch.Error:
+        logging.exception('Caught exception fetching url')
+    return returnString
 
-    except RequestException as e:
-        log_error('Error during requests to {0} : {1}'.format(url, str(e)))
-        return None
-
-
-def is_good_response(resp):
-    """
-    Returns True if the response seems to be HTML, False otherwise.
-    """
-    content_type = resp.headers['Content-Type'].lower()
-    return (resp.status_code == 200 
-            and content_type is not None 
-            and content_type.find('html') > -1)
-
-
-def log_error(e):
-    """
-    It is always a good idea to log errors. 
-    This function just prints them, but you can
-    make it do anything.
-    """
-    print(e)
 
 
 if __name__ == '__main__':
