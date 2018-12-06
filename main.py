@@ -20,10 +20,6 @@ URLS on App Engine
 import logging
 import urllib
 
-# [START urllib2-imports]
-import urllib2
-# [END urllib2-imports]
-
 # [START urlfetch-imports]
 from google.appengine.api import urlfetch
 # [END urlfetch-imports]
