@@ -14,7 +14,9 @@
 
 # [START gae_python37_app]
 from flask import Flask
-from bs4 import BeautifulSoup
+from requests import get
+from requests.exceptions import RequestException
+from contextlib import closing
 
 # If `entrypoint` is not defined in app.yaml, App Engine will look for an app
 # called `app` in `main.py`.
