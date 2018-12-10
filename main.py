@@ -13,6 +13,8 @@
 # limitations under the License.
 
 # [START gae_python37_app]
+
+from flask import Flask
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import sys
@@ -22,7 +24,7 @@ from requests import get
 from requests.exceptions import RequestException
 from contextlib import closing
 from bs4 import BeautifulSoup
-from flask import Flask
+
 
 # If `entrypoint` is not defined in app.yaml, App Engine will look for an app
 # called `app` in `main.py`.
