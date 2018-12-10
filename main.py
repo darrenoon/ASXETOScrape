@@ -13,8 +13,6 @@
 # limitations under the License.
 
 # [START gae_python37_app]
-
-from flask import Flask
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import sys
