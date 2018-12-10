@@ -18,7 +18,6 @@
 import sys
 sys.path.insert(0, 'libs')
 
-import webapp2
 import json
 from bs4 import BeautifulSoup
 from google.appengine.api import urlfetch
