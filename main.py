@@ -18,13 +18,10 @@
 import sys
 sys.path.insert(0, 'libs')
 
-import json
+from requests import get
+from requests.exceptions import RequestException
+from contextlib import closing
 from bs4 import BeautifulSoup
-from google.appengine.api import urlfetch
-import webencodings
-import six
-import html5lib
-import logging
 from flask import Flask
 
 # If `entrypoint` is not defined in app.yaml, App Engine will look for an app
