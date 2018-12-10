@@ -13,9 +13,20 @@
 # limitations under the License.
 
 # [START gae_python37_app]
-from flask import Flask
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 import sys
 sys.path.insert(0, 'libs')
+
+import webapp2
+import json
+from bs4 import BeautifulSoup
+from google.appengine.api import urlfetch
+import webencodings
+import six
+import html5lib
+import logging
+from flask import Flask
 
 # If `entrypoint` is not defined in app.yaml, App Engine will look for an app
 # called `app` in `main.py`.
