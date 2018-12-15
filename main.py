@@ -30,7 +30,11 @@ app = Flask(__name__)
 def hello():
     """Return a friendly HTTP greeting."""
     # r = requests.get('https://api.github.com/events')
-    return 'hello world 123'
+    # return 'hello world 123'
+    url = 'http://www.google.com/humans.txt'
+    response = requests.get(url)
+    response.raise_for_status()
+    return response.text
 
 
 if __name__ == '__main__':
