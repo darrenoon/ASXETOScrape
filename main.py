@@ -25,7 +25,8 @@ app = Flask(__name__)
 @app.route('/')
 def hello():
     """Return a friendly HTTP greeting."""
-    return 'Hello World!'
+    r = requests.get('https://api.github.com/events')
+    return r
 
 
 if __name__ == '__main__':
